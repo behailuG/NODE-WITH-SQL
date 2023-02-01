@@ -28,8 +28,19 @@ const insertBook=async (req,res,next)=>{
         res.status(404).send(error.message);
     }
 }
+const editBook=async (req,res,next)=>{
+    try{
+        const id=req.params.id;
+        const book=req.body;
+        const updateBook=await bookData.editBook(id,book);
+        res.send(updateBook);
+    }catch(error){
+        res.status(404).send(error.message);
+    }
+}
 module.exports={
     getBooks,
     getBook,
-    insertBook
+    insertBook,
+    editBook
 }
