@@ -54,9 +54,21 @@ return editBook.recordset;
         return error.message;
     }
 }
+const deleteBook =async(id)=>{
+    try{
+        let pool=await sql.connect(config.sql);
+        const sqlQueries=await utils.loadSqlQueries('Books');
+        const deleteBook=await pool.request().
+        input('Id',sql.Int,id).query(sqlQueries.deletebook);
+        return deleteBook.recordset;
+    }catch(error){
+        return error.message;
+    }
+}
 module.exports={
     getBooks,
     getById,
     addBook,
-    editBook
+    editBook,
+    deleteBook
 }

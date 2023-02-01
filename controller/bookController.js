@@ -38,9 +38,19 @@ const editBook=async (req,res,next)=>{
         res.status(404).send(error.message);
     }
 }
+const deleteBook=async(req,res,next)=>{
+    try{
+        const id=req.params.id;
+        const deleteBook=await bookData.deleteBook(id);
+        res.send(deleteBook);
+    }catch(error){
+        res.status(404).send(error.message);
+    }
+}
 module.exports={
     getBooks,
     getBook,
     insertBook,
-    editBook
+    editBook,
+    deleteBook
 }
