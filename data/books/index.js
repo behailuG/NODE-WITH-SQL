@@ -28,7 +28,21 @@ const getById=async (bookId)=>{
         return error.message;
     }
 }
+const addBook=async (book)=>{
+    try{
+        let pool=await sql.connect(config.sql);
+        const sqlQueries=await utils.loadSqlQueries('Books');
+        const addBook=await pool.request().
+        input('Name',sql.NVarChar,book.name).
+        input('Author',sql.NVarChar,book.author).query(sqlQueries.createbook);
+        return addBook.recordset;
+    }
+    catch(error){
+        return false;
+    }
+}
 module.exports={
     getBooks,
-    getById
+    getById,
+    addBook
 }

@@ -1,0 +1,1 @@
+INSERT INTO Books([Name],[Author])VALUES(@Name,@Author)

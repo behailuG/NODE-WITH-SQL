@@ -12,13 +12,24 @@ const getBooks=async (req,res,next)=>{
 const getBook=async (req,res,next)=>{
     try{
         const id=req.params.id;
-        const oneEvent=await bookData.getById(id);
-        res.send(oneEvent);
+        const oneBook=await bookData.getById(id);
+        res.send(oneBook);
     }catch(error){
+        res.status(404).send(error.message);
+    }
+}
+const insertBook=async (req,res,next)=>{
+    try{
+        const book= req.body;
+        const create=await bookData.addBook(book);
+        res.send(create);
+    }
+    catch(error){
         res.status(404).send(error.message);
     }
 }
 module.exports={
     getBooks,
-    getBook
+    getBook,
+    insertBook
 }
